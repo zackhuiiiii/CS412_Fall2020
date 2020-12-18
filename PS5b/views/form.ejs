@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link href="/bootstrap/bootstrap.css" rel="stylesheet" type="text/css">
+  <link rel='stylesheet' href='/stylesheets/style.css' type="text/css" />
+</head>
+
+<body class="bg-info">
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col-6 shadow p-3 mb-5 bg-white rounded">
+
+        <h3>
+          Retrieve the current weather conditions
+        </h3>
+        <div>
+          <form class="form" id="form" action="/ps4/weather" method="POST">
+            <label for="city_name">City Name</label>
+            <input class="form-control" type="text" id="city_name" name="city_name" value="" required>
+            <button class="btn btn-primary mt-3" type="submit" id="submit">Search</button>
+          </form>
+        </div>
+        <div id="weather" class="py-3">
+
+        </div>
+      </div>
+      <div class="col">
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  window.onload = function () {
+    // console.log('onload')
+
+    const form = document.getElementById('form')
+    const weather = document.getElementById('weather')
+    const submit = document.getElementById('submit')
+
+    form.onsubmit = function (e) {
+      e.preventDefault();
+      // console.log('form submit');
+
+      submit.setAttribute('disabled', 'disabled');
+      weather.innerHTML = '';
+
+      const city_name = form.city_name.value;
+      // console.log(city_name)
+      fetch('/ps4/weather', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          city_name
+        })
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+
+          if (data.cod == 200) {
+            weather.innerHTML = `
+        <span>the data is ${data.cache ? '' : 'not'} came from cache</span>
+        <h2>
+          ${data.name}
+        </h2>
+        <p>
+          temperature: ${data.main.temp}
+        </p>
+        <p>
+          minimum temperature: ${data.main.temp_min}
+        </p>
+        <p>
+          maximum temperature: ${data.main.temp_max}
+        </p>
+        <p>
+          pressure: ${data.main.pressure}
+        </p>
+        <p>
+          humidity: ${data.main.humidity}
+        </p>
+            `;
+          } else {
+            weather.innerHTML = `<h2>${data.message}</h2>`;
+          }
+        })
+        .catch(error => {
+          console.error(error)
+        })
+        .then(() => {
+          // console.log('then')
+          submit.removeAttribute('disabled');
+        })
+    };
+  };
+</script>
+
+</html>
