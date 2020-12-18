@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link href="/bootstrap/bootstrap.css" rel="stylesheet" type="text/css">
+  <link rel='stylesheet' href='/stylesheets/style.css' type="text/css" />
+</head>
+
+<body class="bg-info">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col-6 shadow p-3 mb-5 bg-white rounded">
+      
+  <h3>
+    Search city name: <%= city_name %>
+  </h3>
+
+  <a href="/ps4">Back to form</a>
+
+  <div class="weather mt-3">
+    <% if (data) { %>
+      <% if (data.cod==200) { %>
+        <h5>
+          <%= data.name %>
+        </h5>
+        <p>
+          temperature: <%= data.main.temp %>
+        </p>
+        <p>
+          minimum temperature: <%= data.main.temp_min %>
+        </p>
+        <p>
+          maximum temperature: <%= data.main.temp_max %>
+        </p>
+        <p>
+          pressure: <%= data.main.pressure %>
+        </p>
+        <p>
+          humidity: <%= data.main.humidity %>
+        </p>
+      <% } else { %>
+        <h2>
+          <%= data.message %>
+        </h2>
+      <% } %>
+    <% } %>
+  </div>
+</div>
+      <div class="col">
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

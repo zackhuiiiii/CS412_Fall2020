@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link href="/bootstrap/bootstrap.css" rel="stylesheet" type="text/css">
+  <link rel='stylesheet' href='/stylesheets/style.css' type="text/css" />
+</head>
+
+<body class="bg-info">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col-6 shadow p-3 mb-5 bg-white rounded">
+
+        <h3>
+          Retrieve the current weather conditions
+        </h3>
+        <div class="form">
+          <form class="form" action="/ps4/weather" method="POST">
+            <label for="city_name">City Name</label>
+            <input class="form-control" type="text" id="city_name" name="city_name" value="" required>
+            <button class="btn btn-primary my-3" type="submit">Search</button>
+          </form>
+        </div>
+
+      </div>
+      <div class="col">
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
