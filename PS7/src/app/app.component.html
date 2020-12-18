@@ -1,0 +1,74 @@
+<h1>
+  Retrieve the current weather conditions
+</h1>
+<!-- <span>{{ title }} app is running!</span> -->
+
+<div *ngIf="weather; else noData">
+
+  <div *ngIf="weather.cod == 200; else noResult">
+    <div>
+      <p class="key">
+        name:
+      </p>
+      <div class="value">
+        {{weather.name}}
+      </div>
+    </div>
+    <div>
+      <p class="key">
+        weather:
+      </p>
+      <div class="value">
+        <ul>
+          <li *ngFor="let weather of weather.weather">
+            <div>
+              main: {{weather.main}}
+            </div>
+            <div>
+              description: {{weather.description}}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <p class="key">
+        coordinate:
+      </p>
+      <div class="value">
+        <div>
+          longitude: {{weather.coord.lon}}
+        </div>
+        <div>
+          latitude: {{weather.coord.lat}}
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="key">
+        main:
+      </p>
+      <div class="value">
+        <div>
+          temperature: {{weather.main.temp}}
+        </div>
+        <div>
+          pressure: {{weather.main.pressure}}
+        </div>
+        <div>
+          humidity: {{weather.main.humidity}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noResult>
+    <p>{{weather.message}}</p>
+  </ng-template>
+</div>
+<ng-template #noData>
+  <div>
+    no data
+  </div>
+</ng-template>
+
+<button (click)="onSearch()">search</button>

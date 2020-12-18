@@ -1,0 +1,23 @@
+<!-- <p>form works!</p> -->
+
+<form [formGroup]="searchForm" class="form shadow p-3 mb-5 bg-white rounded" (ngSubmit)="onSubmit(searchForm.value)">
+
+  <div class="form-group">
+    <label for="name">
+      City Name
+    </label>
+    <input class="form-control" id="name" type="text" formControlName="name">
+  </div>
+
+  <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+    <div *ngIf="name.errors.required">
+      city name is required.
+    </div>
+    <div *ngIf="name.errors.minlength">
+      city name must be longer than 1 character
+    </div>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Query</button>
+
+</form>

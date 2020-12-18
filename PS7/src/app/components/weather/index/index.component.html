@@ -1,0 +1,12 @@
+<!-- <p>index works!</p> -->
+
+<div class="container p-3">
+  <div class="row">
+    <div class="col-sm">
+    <app-form (parentFun)="parentFun($event)"></app-form>
+    </div>
+    <div class="col-sm">
+    <app-result *ngIf="result" [weather]="result"></app-result>
+    </div>
+  </div>
+</div>
